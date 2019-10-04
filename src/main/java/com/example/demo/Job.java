@@ -6,6 +6,7 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.Date;
 
@@ -17,19 +18,20 @@ public class Job {
     @DateTimeFormat(pattern = "yyyy-MM-dd")
     private String title;
     private String description;
-    private Date postedDate;
+    private LocalDate postedDate;
     private String author;
     private String phone;
     private String city;
 
     public Job(){}
 
-    public Job(String title, String description, String author, String phone){
+    public Job(String title, String description, String author, String phone, LocalDate date){
         this.title = title;
         this.description = description;
-        this.postedDate = new Date();
+        this.postedDate = date;
         this.author = author;
         this.phone = phone;
+        System.out.println("Date"+postedDate);
     }
 
     public String getTitle() {
@@ -48,11 +50,11 @@ public class Job {
         this.description = description;
     }
 
-    public Date getPostedDate() {
+    public LocalDate getPostedDate() {
         return postedDate;
     }
 
-    public void setPostedDate(Date postedDate) {
+    public void setPostedDate(LocalDate postedDate) {
         this.postedDate = postedDate;
     }
 

@@ -6,6 +6,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
 import java.text.SimpleDateFormat;
+import java.time.LocalDate;
 import java.util.Date;
 
 @Controller
@@ -25,9 +26,9 @@ public class HomeController {
         return "jobform";
     }
 
-    @GetMapping("/search")
-    public String getSearch(Model model){
-        model.addAttribute("jobs", jobRepository.findAll());
+    @PostMapping("/search")
+    public String getSearch(Model model, @RequestParam(name="search") String search ){
+        model.addAttribute("jobs", jobRepository.findByCity(search));
         return "index";
     }
 
@@ -50,19 +51,17 @@ public class HomeController {
     }
 
     @PostMapping("/processjob")
-    public String processForm(@ModelAttribute Job job, @RequestParam(name = "date")
-            String date){
+    public String processForm(@ModelAttribute Job job){
         String pattern = "yyyy-MM-dd";
-        System.out.println(date);
-        try {
-//            String formattedDate = date.substring(date.length()-1);
+
+
+            //String formattedDate = date.substring(date.length()-1);
             SimpleDateFormat simpleDateFormat = new SimpleDateFormat(pattern);
-            Date realDate = simpleDateFormat.parse(date);
+            LocalDate realDate = LocalDate.now();
             job.setPostedDate(realDate);
-        }
-        catch (java.text.ParseException e){
-            e.printStackTrace();
-        }
+        System.out.println(realDate);
+
+
 
         jobRepository.save(job);
         return "redirect:/";

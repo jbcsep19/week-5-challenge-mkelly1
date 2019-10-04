@@ -8,10 +8,11 @@
     <style>
         body, html {
             height: 100%;
+            color: ivory;
         }
         .bg {
             /* The image used */
-            background-image: url("https://res.cloudinary.com/dhmt9zect/image/upload/v1570047149/airline_ikpbox.jpg");
+            background-image: url("https://res.cloudinary.com/dhmt9zect/image/upload/v1570198153/jobBG_aoveqh.jpg");
 
             /* Full height */
             height: 100%;
@@ -22,6 +23,21 @@
             background-size: cover;
             opacity: 50%;
         }
+        table{
+            width: 100%;
+        }
+        th, td{
+            height: 50px;
+        }
+        #box{
+            background-color: dimgray;
+        }
+        text{
+            color: ivory;
+        }
+        a{
+            color: gold;
+        }
     </style>
     <title>Job</title>
 </head>
@@ -29,8 +45,40 @@
 <div class="bg">
     <div class="container">
         <div th:insert="index::navbarJob"></div>
+        <br/>
+        <div class="container" id="box">
+            <br/>
+            <h2>Job Details</h2>
+            <br/>
+            <table>
+                <tr>
+                    <th>Date</th>
+                    <th>Title</th>
+                    <th>City</th>
+                    <th>Posted By</th>
+                    <th>Phone</th>
+                    <th>Description</th>
+                </tr>
+                <tr><b>
+                    <td th:text="${job.postedDate}"></td>
+                    <td th:text="${job.title}"></td>
+                    <td th:text="${job.city}"></td>
+                    <td th:text="${job.author}"></td>
+                    <td th:text="${job.phone}"></td>
+                    <td th:text="${job.description}"></td>
+                    <td><a th:href="@{/update/{id}(id=${job.id})}">Update</a>
+                    <td><a th:href="@{/delete/{id}(id=${job.id})}">Delete</a>
+                        <!--                <td><a th:href="@{/update/{id}(id=${flight.id})}">Update</a></td>-->
+                    </td>
+                </b>
+                </tr>
+            </table>
+            <br/>
+        </div>
+
 
     </div>
 </div>
+<div th:insert="index::script-boot"></div>
 </body>
 </html>
