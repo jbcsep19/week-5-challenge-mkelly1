@@ -52,16 +52,9 @@ public class HomeController {
 
     @PostMapping("/processjob")
     public String processForm(@ModelAttribute Job job){
-        String pattern = "yyyy-MM-dd";
-
-
-            //String formattedDate = date.substring(date.length()-1);
-            SimpleDateFormat simpleDateFormat = new SimpleDateFormat(pattern);
-            LocalDate realDate = LocalDate.now();
-            job.setPostedDate(realDate);
-        System.out.println(realDate);
-
-
+        LocalDate realDate = LocalDate.now();
+        job.setPostedDate(realDate);
+        //System.out.println(realDate);
 
         jobRepository.save(job);
         return "redirect:/";
